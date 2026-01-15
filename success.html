@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Payment successful! Your BookNest platform will be delivered shortly.">
+    <title>Payment Successful - Zelera BookNest Platform</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">ZELERA</a>
+        </div>
+    </nav>
+
+    <!-- SUCCESS SECTION -->
+    <section
+        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 0 4rem;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-glass text-center animate-on-scroll scale-in" style="padding: 3rem;">
+
+                        <!-- SUCCESS ICON -->
+                        <div style="margin-bottom: 2rem;">
+                            <div class="success-checkmark"
+                                style="width: 120px; height: 120px; margin: 0 auto; position: relative; display: inline-block;">
+                                <svg width="120" height="120" viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="55" fill="none" stroke="#FFD700" stroke-width="4"
+                                        class="animate-on-scroll scale-in" />
+                                    <path d="M30 60 L50 80 L90 40" fill="none" stroke="#FFD700" stroke-width="6"
+                                        stroke-linecap="round" stroke-linejoin="round" class="animate-on-scroll"
+                                        style="animation: checkmark 0.5s ease 0.3s forwards; stroke-dasharray: 100; stroke-dashoffset: 100;" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <h1
+                            style="color: var(--color-gold); margin-bottom: 1rem; animation: fadeInUp 0.8s ease 0.5s backwards;">
+                            🎉 Payment Successful!
+                        </h1>
+
+                        <p
+                            style="font-size: 1.25rem; margin-bottom: 2rem; animation: fadeInUp 0.8s ease 0.7s backwards;">
+                            Thank you for choosing BookNest! Your order has been confirmed.
+                        </p>
+
+                        <!-- ORDER DETAILS -->
+                        <div
+                            style="background: var(--color-black); padding: 2rem; border-radius: var(--radius-xl); margin-bottom: 2rem; text-align: left; animation: fadeInUp 0.8s ease 0.9s backwards;">
+                            <h3 style="color: var(--color-neon-blue); margin-bottom: 1.5rem; text-align: center;">
+                                <i class="fas fa-file-invoice"></i> Order Details
+                            </h3>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong style="color: var(--color-gray-lightest);">Order ID:</strong>
+                                    <p id="success-order-id" style="color: var(--color-white); margin: 0.5rem 0 0;">
+                                        ZEL1234567890</p>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <strong style="color: var(--color-gray-lightest);">Plan:</strong>
+                                    <p id="success-plan-name" style="color: var(--color-white); margin: 0.5rem 0 0;">
+                                        Premium Plan</p>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <strong style="color: var(--color-gray-lightest);">Amount Paid:</strong>
+                                    <p id="success-amount"
+                                        style="color: var(--color-gold); margin: 0.5rem 0 0; font-weight: 700; font-size: 1.25rem;">
+                                        ₹1,00,000</p>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <strong style="color: var(--color-gray-lightest);">Payment ID:</strong>
+                                    <p id="success-payment-id" style="color: var(--color-white); margin: 0.5rem 0 0;">
+                                        PAY_XXXXXXXXXX</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEXT STEPS -->
+                        <div
+                            style="background: rgba(0, 217, 255, 0.1); padding: 2rem; border-radius: var(--radius-xl); margin-bottom: 2rem; text-align: left; border: 2px solid var(--color-neon-blue); animation: fadeInUp 0.8s ease 1.1s backwards;">
+                            <h4 style="color: var(--color-neon-blue); margin-bottom: 1rem;">
+                                <i class="fas fa-clipboard-check"></i> Next Steps
+                            </h4>
+
+                            <ol style="padding-left: 1.5rem; color: var(--color-white);">
+                                <li style="margin-bottom: 1rem;">
+                                    <strong>Check Your Email:</strong> We've sent order confirmation and product details
+                                    to your email address within 24 hours.
+                                </li>
+                                <li style="margin-bottom: 1rem;">
+                                    <strong>Download BookNest:</strong> You'll receive download links and installation
+                                    instructions via email.
+                                </li>
+                                <li style="margin-bottom: 1rem;">
+                                    <strong>Access Credentials:</strong> Your admin login credentials will be sent in a
+                                    separate secure email.
+                                </li>
+                                <li style="margin-bottom: 0;">
+                                    <strong>Get Support:</strong> Our team is ready to help you get started. Contact us
+                                    anytime!
+                                </li>
+                            </ol>
+                        </div>
+
+                        <!-- EMAIL NOTIFICATION -->
+                        <div
+                            style="background: rgba(255, 215, 0, 0.1); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 2rem; border: 2px solid var(--color-gold); animation: fadeInUp 0.8s ease 1.3s backwards;">
+                            <i class="fas fa-envelope"
+                                style="font-size: 2.5rem; color: var(--color-gold); margin-bottom: 1rem;"></i>
+                            <h5 style="color: var(--color-gold); margin-bottom: 0.5rem;">
+                                📧 Order Confirmation Email Sent!
+                            </h5>
+                            <p style="margin: 0; font-size: 0.875rem;">
+                                Please check your inbox (and spam folder) for order details and download instructions.
+                            </p>
+                        </div>
+
+                        <!-- ACTION BUTTONS -->
+                        <div
+                            style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease 1.5s backwards;">
+                            <a href="index.html" class="btn btn-primary btn-lg">
+                                <i class="fas fa-home"></i> Back to Home
+                            </a>
+                            <a href="contact.html" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-headset"></i> Contact Support
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SUPPORT SECTION -->
+                    <div class="text-center mt-4 animate-on-scroll fade-in-up">
+                        <div style="background: var(--color-charcoal); padding: 2rem; border-radius: var(--radius-xl);">
+                            <h4 style="color: var(--color-white); margin-bottom: 1rem;">
+                                <i class="fas fa-question-circle" style="color: var(--color-neon-blue);"></i>
+                                Need Help Getting Started?
+                            </h4>
+                            <p style="color: var(--color-gray-lightest); margin-bottom: 1.5rem;">
+                                Our support team is here to help you every step of the way
+                            </p>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <i class="fas fa-envelope"
+                                        style="font-size: 2rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                                    <p style="margin: 0; font-weight: 600;">Email</p>
+                                    <a href="mailto:support@zelera.com"
+                                        style="font-size: 0.875rem;">support@zelera.com</a>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <i class="fab fa-whatsapp"
+                                        style="font-size: 2rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                                    <p style="margin: 0; font-weight: 600;">WhatsApp</p>
+                                    <a href="https://wa.me/91XXXXXXXXXX" target="_blank"
+                                        style="font-size: 0.875rem;">+91-XXXXX-XXXXX</a>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <i class="fas fa-phone"
+                                        style="font-size: 2rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                                    <p style="margin: 0; font-weight: 600;">Phone</p>
+                                    <a href="tel:+91XXXXXXXXXX" style="font-size: 0.875rem;">+91-XXXXX-XXXXX</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="padding: 2rem 0;">
+                <p>&copy; 2026 Zelera. All rights reserved. Thank you for choosing BookNest!</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Load order details from localStorage -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load order details from localStorage
+            const lastOrder = localStorage.getItem('lastOrder');
+
+            if (lastOrder) {
+                const orderData = JSON.parse(lastOrder);
+
+                // Update order details
+                document.getElementById('success-order-id').textContent = orderData.orderId || 'ZEL' + Date.now();
+                document.getElementById('success-plan-name').textContent = (orderData.plan === 'standard' ? 'Standard' : 'Premium') + ' Plan';
+                document.getElementById('success-payment-id').textContent = orderData.paymentId || 'PAY_XXXXXXXXXX';
+
+                // Format amount with currency
+                const currency = orderData.currency || 'INR';
+                const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€', 'GBP': '£' };
+                const symbol = symbols[currency] || currency;
+                document.getElementById('success-amount').textContent = symbol + orderData.amount.toLocaleString();
+            }
+        });
+    </script>
+</body>
+
+</html>

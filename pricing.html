@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Choose your BookNest plan - Standard or Premium. Enterprise-grade book management platform with flexible pricing.">
+    <title>Pricing - Zelera BookNest Platform | Choose Your Plan</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">ZELERA</a>
+
+            <button class="navbar-toggler" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="navbar-nav">
+                <button class="nav-close-btn" aria-label="Close navigation">
+                    <i class="fas fa-times"></i>
+                </button>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
+                <li><a href="why-booknest.html" class="nav-link">Why BookNest</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="#pricing-plans" class="btn btn-primary btn-sm">Buy Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PRICING HERO -->
+    <section class="hero" style="min-height: 60vh;">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate-on-scroll fade-in-up">
+                    Choose Your Plan
+                </h1>
+
+                <p class="hero-subtitle animate-on-scroll fade-in-up delay-1">
+                    Premium performance, premium value. Select the plan that fits your business needs.
+                </p>
+
+                <!-- Currency Selector -->
+                <div class="animate-on-scroll fade-in-up delay-2" style="margin-top: 2rem;">
+                    <div data-currency-selector-container style="display: flex; justify-content: center;">
+                        <div class="currency-selector">
+                            <label style="margin-right: 0.5rem; font-weight: 600;">Select Currency:</label>
+                            <select data-currency-selector
+                                style="padding: 0.5rem 1rem; border-radius: 25px; background: var(--color-charcoal); color: var(--color-white); border: 2px solid var(--color-gold); font-weight: 600; cursor: pointer;">
+                                <option value="INR">India (₹)</option>
+                                <option value="USD">USA ($)</option>
+                                <option value="EUR">Europe (€)</option>
+                                <option value="GBP">UK (£)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING PLANS -->
+    <section id="pricing-plans" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+
+                <!-- STANDARD PLAN -->
+                <div class="col-lg-5">
+                    <div class="pricing-card animate-on-scroll fade-in-left">
+                        <h3 class="pricing-title">
+                            <i class="fas fa-star" style="color: var(--color-neon-blue);"></i>
+                            Standard Plan
+                        </h3>
+
+                        <div class="pricing-price" data-price="standard">₹75,000</div>
+                        <p style="color: var(--color-gray-lightest); margin-bottom: 2rem;">
+                            Perfect for growing book businesses
+                        </p>
+
+                        <ul class="pricing-features">
+                            <li>Complete BookNest website</li>
+                            <li>Professional admin panel</li>
+                            <li>User authentication system</li>
+                            <li>Book management system</li>
+                            <li>Shopping cart & checkout</li>
+                            <li>Payment gateway integration</li>
+                            <li>Mobile responsive design</li>
+                            <li>SEO optimized</li>
+                            <li>3 months support</li>
+                            <li>Free updates</li>
+                            <li>Documentation included</li>
+                            <li>Email support</li>
+                        </ul>
+
+                        <button class="btn btn-secondary btn-lg w-100 mt-4" data-buy-plan="standard">
+                            <i class="fas fa-shopping-cart"></i> Buy Standard Plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PREMIUM PLAN (FEATURED) -->
+                <div class="col-lg-5">
+                    <div class="pricing-card featured animate-on-scroll fade-in-right">
+                        <span class="pricing-badge badge-glow">
+                            <i class="fas fa-crown"></i> MOST POPULAR
+                        </span>
+
+                        <h3 class="pricing-title">
+                            <i class="fas fa-crown" style="color: var(--color-gold);"></i>
+                            Premium Plan
+                        </h3>
+
+                        <div class="pricing-price" data-price="premium">₹1,00,000</div>
+                        <p style="color: var(--color-gray-lightest); margin-bottom: 2rem;">
+                            For serious businesses demanding excellence
+                        </p>
+
+                        <ul class="pricing-features">
+                            <li><strong>Everything in Standard, plus:</strong></li>
+                            <li>Custom UI branding & design</li>
+                            <li>Advanced analytics dashboard</li>
+                            <li>Multi-currency support</li>
+                            <li>Inventory management</li>
+                            <li>Customer management system</li>
+                            <li>Email marketing integration</li>
+                            <li>Advanced reporting</li>
+                            <li>Priority support (6 months)</li>
+                            <li>Deployment assistance</li>
+                            <li>WhatsApp support</li>
+                            <li>1-on-1 onboarding call</li>
+                            <li>Unlimited email support</li>
+                            <li>Free feature requests</li>
+                        </ul>
+
+                        <button class="btn btn-primary btn-lg w-100 mt-4 pulse" data-buy-plan="premium">
+                            <i class="fas fa-crown"></i> Buy Premium Plan
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- COMPARISON NOTE -->
+            <div class="text-center mt-5 animate-on-scroll fade-in-up">
+                <div
+                    style="background: var(--color-charcoal); padding: 2rem; border-radius: var(--radius-xl); max-width: 800px; margin: 0 auto; border: 2px solid var(--color-gold);">
+                    <h4 style="color: var(--color-gold); margin-bottom: 1rem;">
+                        <i class="fas fa-shield-alt"></i> Our Guarantee
+                    </h4>
+                    <p style="color: var(--color-white); margin-bottom: 0;">
+                        All plans include enterprise-level security, bank-grade encryption, and our commitment to your
+                        success. We're here to help you build a thriving book business.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLAN COMPARISON TABLE -->
+    <section style="background: var(--color-charcoal); padding: 4rem 0;">
+        <div class="container">
+            <div class="section-header animate-on-scroll fade-in-up">
+                <h2 class="section-title">Detailed Plan Comparison</h2>
+                <p class="section-subtitle">See exactly what's included in each plan</p>
+            </div>
+
+            <div class="animate-on-scroll fade-in-up" style="overflow-x: auto;">
+                <table
+                    style="width: 100%; background: var(--color-black); border-radius: var(--radius-xl); overflow: hidden;">
+                    <thead style="background: var(--gradient-gold);">
+                        <tr>
+                            <th style="padding: 1.5rem; text-align: left; color: var(--color-black); font-weight: 700;">
+                                Feature</th>
+                            <th
+                                style="padding: 1.5rem; text-align: center; color: var(--color-black); font-weight: 700;">
+                                Standard</th>
+                            <th
+                                style="padding: 1.5rem; text-align: center; color: var(--color-black); font-weight: 700;">
+                                Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;">Complete Website</td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;">Admin Dashboard</td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;">Payment Integration</td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;">Mobile Responsive</td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;"><strong>Custom Branding</strong></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;"><strong>Advanced Analytics</strong></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;"><strong>Multi-Currency</strong></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;">Support Duration</td>
+                            <td style="padding: 1rem; text-align: center;">3 months</td>
+                            <td style="padding: 1rem; text-align: center;"><strong>6 months</strong></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 1rem;"><strong>Priority Support</strong></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem;"><strong>Deployment Assistance</strong></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section>
+        <div class="container">
+            <div class="section-header animate-on-scroll fade-in-up">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-glass mb-3 animate-on-scroll fade-in-up">
+                        <h4><i class="fas fa-question-circle"
+                                style="color: var(--color-gold); margin-right: 0.5rem;"></i>What payment methods do you
+                            accept?</h4>
+                        <p>We accept payments through Razorpay (UPI, cards, net banking) and Cash on Delivery. All
+                            Razorpay
+                            transactions are secure and encrypted.</p>
+                    </div>
+
+                    <div class="card card-glass mb-3 animate-on-scroll fade-in-up delay-1">
+                        <h4><i class="fas fa-question-circle"
+                                style="color: var(--color-gold); margin-right: 0.5rem;"></i>How quickly will I receive
+                            the platform?</h4>
+                        <p>After payment confirmation, you'll receive access credentials and download links via email
+                            within 24 hours.</p>
+                    </div>
+
+                    <div class="card card-glass mb-3 animate-on-scroll fade-in-up delay-2">
+                        <h4><i class="fas fa-question-circle"
+                                style="color: var(--color-gold); margin-right: 0.5rem;"></i>Can I upgrade from Standard
+                            to Premium later?</h4>
+                        <p>Yes! You can upgrade anytime by paying the price difference. Contact our support team for
+                            assistance.</p>
+                    </div>
+
+                    <div class="card card-glass mb-3 animate-on-scroll fade-in-up delay-3">
+                        <h4><i class="fas fa-question-circle"
+                                style="color: var(--color-gold); margin-right: 0.5rem;"></i>Do you offer refunds?</h4>
+                        <p>We offer a 7-day money-back guarantee if the platform doesn't meet your expectations. No
+                            questions asked.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section
+        style="background: linear-gradient(135deg, var(--color-deep-gray) 0%, var(--color-black) 100%); padding: 5rem 0;">
+        <div class="container text-center">
+            <div class="animate-on-scroll fade-in-up">
+                <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">
+                    Ready to Get Started?
+                </h2>
+                <p style="font-size: 1.25rem; color: var(--color-gray-lightest); margin-bottom: 2rem;">
+                    Choose your plan and start building your book empire today!
+                </p>
+                <a href="#pricing-plans" class="btn btn-primary btn-lg pulse">
+                    <i class="fas fa-arrow-up"></i> View Plans
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ZELERA</h4>
+                    <p>Premium BookNest Platform<br>Built for serious businesses</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="why-booknest.html">Why BookNest</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@zelera.com</li>
+                        <li><i class="fas fa-phone"></i> +91-XXXXX-XXXXX</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zelera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/pricing.js"></script>
+    <script src="assets/js/payment.js"></script>
+</body>
+
+</html>

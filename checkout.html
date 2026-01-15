@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your BookNest purchase - Secure checkout with multiple payment options">
+    <title>Checkout - Zelera BookNest Platform</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">ZELERA</a>
+
+            <ul class="navbar-nav" style="flex-direction: row; gap: 2rem;">
+                <li><a href="pricing.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Pricing</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CHECKOUT SECTION -->
+    <section style="padding: 6rem 0 4rem;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="card card-glass animate-on-scroll fade-in-left">
+                        <h2 style="margin-bottom: 2rem;">
+                            <i class="fas fa-shopping-cart" style="color: var(--color-gold);"></i>
+                            Complete Your Purchase
+                        </h2>
+
+                        <!-- CUSTOMER DETAILS FORM -->
+                        <form id="checkout-form" data-validate>
+                            <h4 style="color: var(--color-neon-blue); margin-bottom: 1.5rem;">Customer Information</h4>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customer-name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="customer-name" placeholder="John Doe"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="customer-email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="customer-email"
+                                        placeholder="john@example.com" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customer-phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="customer-phone"
+                                        placeholder="+91 XXXXX XXXXX" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="customer-company" class="form-label">Company Name (Optional)</label>
+                                    <input type="text" class="form-control" id="customer-company"
+                                        placeholder="Your Company">
+                                </div>
+                            </div>
+
+                            <hr style="margin: 2rem 0; border-color: rgba(255,255,255,0.1);">
+
+                            <!--  PAYMENT METHOD SELECTION -->
+                            <h4 style="color: var(--color-neon-blue); margin-bottom: 1.5rem;">Select Payment Method</h4>
+
+                            <div class="payment-methods">
+                                <div class="payment-method selected" data-method="razorpay">
+                                    <div
+                                        style="height: 50px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+                                        <svg width="120" height="30" viewBox="0 0 120 30" fill="#00D9FF">
+                                            <text x="0" y="20" font-family="Arial, sans-serif" font-size="20"
+                                                font-weight="bold">Razorpay</text>
+                                        </svg>
+                                    </div>
+                                    <p style="font-size: 0.875rem; margin: 0;">UPI, Cards, Net Banking</p>
+                                </div>
+
+                                <div class="payment-method" data-method="cod">
+                                    <div
+                                        style="height: 50px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: #00D9FF;"></i>
+                                    </div>
+                                    <p style="font-size: 0.875rem; margin: 0;">Cash on Delivery</p>
+                                </div>
+                            </div>
+
+                            <hr style="margin: 2rem 0; border-color: rgba(255,255,255,0.1);">
+
+                            <!-- SECURITY BADGE -->
+                            <div
+                                style="background: rgba(0, 217, 255, 0.1); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 2rem; border: 2px solid var(--color-neon-blue);">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <i class="fas fa-shield-alt"
+                                        style="font-size: 2rem; color: var(--color-neon-blue);"></i>
+                                    <div>
+                                        <h5 style="margin: 0; color: var(--color-neon-blue);">Secure Payment</h5>
+                                        <p style="margin: 0; font-size: 0.875rem; color: var(--color-white);">Your
+                                            payment information is encrypted and secure. We never store your card
+                                            details.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SUBMIT BUTTON -->
+                            <button type="submit" class="btn btn-primary btn-lg w-100 pulse">
+                                <i class="fas fa-lock"></i> Proceed to Payment
+                            </button>
+
+                            <p
+                                style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--color-gray-lightest);">
+                                By proceeding, you agree to our Terms of Service and Privacy Policy
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ORDER SUMMARY -->
+                <div class="col-lg-4">
+                    <div class="card card-glass animate-on-scroll fade-in-right sticky-top" style="top: 100px;">
+                        <h3 style="margin-bottom: 1.5rem; color: var(--color-gold);">
+                            <i class="fas fa-file-invoice"></i> Order Summary
+                        </h3>
+
+                        <div
+                            style="padding: 1.5rem; background: var(--color-black); border-radius: var(--radius-lg); margin-bottom: 1rem;">
+                            <h4 id="order-plan-name" style="color: var(--color-white); margin-bottom: 0.5rem;">Premium
+                                Plan</h4>
+                            <p style="color: var(--color-gray-lightest); font-size: 0.875rem; margin-bottom: 1rem;">
+                                Enterprise-grade BookNest platform</p>
+
+                            <div
+                                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; margin-top: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Plan Price:</span>
+                                    <span id="order-plan-price"
+                                        style="font-weight: 700; color: var(--color-gold); font-size: 1.5rem;">₹1,00,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: rgba(255, 215, 0, 0.1); padding: 1rem; border-radius: var(--radius-lg); margin-bottom: 1rem; border: 2px solid var(--color-gold);">
+                            <h5 style="margin-bottom: 0.5rem; color: var(--color-gold);">
+                                <i class="fas fa-check-circle"></i> What's Included
+                            </h5>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check"
+                                        style="color: var(--color-gold); margin-right: 0.5rem;"></i>Complete Platform
+                                    Access</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check"
+                                        style="color: var(--color-gold); margin-right: 0.5rem;"></i>Email Delivery in
+                                    24h</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check"
+                                        style="color: var(--color-gold); margin-right: 0.5rem;"></i>Documentation
+                                    Included</li>
+                                <li style="padding: 0.25rem 0;"><i class="fas fa-check"
+                                        style="color: var(--color-gold); margin-right: 0.5rem;"></i>Premium Support</li>
+                            </ul>
+                        </div>
+
+                        <!-- Currency Selector in Sidebar -->
+                        <div style="margin-bottom: 1rem;">
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.875rem;">Currency:</label>
+                            <select data-currency-selector class="form-control">
+                                <option value="INR">India (₹)</option>
+                                <option value="USD">USA ($)</option>
+                                <option value="EUR">Europe (€)</option>
+                                <option value="GBP">UK (£)</option>
+                            </select>
+                        </div>
+
+                        <div
+                            style="background: rgba(0, 217, 255, 0.1); padding: 1rem; border-radius: var(--radius-lg); text-align: center;">
+                            <i class="fas fa-headset"
+                                style="font-size: 2rem; color: var(--color-neon-blue); margin-bottom: 0.5rem;"></i>
+                            <p style="margin: 0; font-size: 0.875rem;">Need help? <a href="contact.html"
+                                    style="color: var(--color-gold);">Contact us</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST BADGES -->
+    <section style="background: var(--color-charcoal); padding: 3rem 0;">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-lock"
+                        style="font-size: 2.5rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                    <h5>Secure Payment</h5>
+                    <p style="font-size: 0.875rem; margin: 0;">SSL Encrypted</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-shield-alt"
+                        style="font-size: 2.5rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                    <h5>Money Back</h5>
+                    <p style="font-size: 0.875rem; margin: 0;">7-Day Guarantee</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-headset"
+                        style="font-size: 2.5rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                    <h5>24/7 Support</h5>
+                    <p style="font-size: 0.875rem; margin: 0;">Always Here to Help</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-bolt"
+                        style="font-size: 2.5rem; color: var(--color-gold); margin-bottom: 0.5rem;"></i>
+                    <h5>Instant Access</h5>
+                    <p style="font-size: 0.875rem; margin: 0;">Delivered in 24h</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="padding: 2rem 0;">
+                <p>&copy; 2026 Zelera. All rights reserved. Enterprise-grade solution for serious businesses.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/pricing.js"></script>
+    <script src="assets/js/payment.js"></script>
+    <script src="assets/js/emailService.js"></script>
+</body>
+
+</html>
