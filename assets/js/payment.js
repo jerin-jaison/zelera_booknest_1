@@ -102,7 +102,10 @@ class PaymentManager {
         // Get price data from pricing manager
         const priceData = window.pricingManager ?
             window.pricingManager.getPriceData(plan) :
-            { amount: plan === 'standard' ? 75000 : 100000, currency: 'INR' };
+            {
+                amount: plan === 'basic' ? 75000 : (plan === 'standard' ? 100000 : 150000),
+                currency: 'INR'
+            };
 
         // Store order data
         this.orderData = {
@@ -136,7 +139,12 @@ class PaymentManager {
         const planPrice = document.getElementById('order-plan-price');
 
         if (planName) {
-            planName.textContent = this.orderData.plan === 'standard' ? 'Standard Plan' : 'Premium Plan';
+            const planNames = {
+                'basic': 'Basic Plan',
+                'standard': 'Standard Plan',
+                'premium': 'Premium Plan'
+            };
+            planName.textContent = planNames[this.orderData.plan] || 'Unknown Plan';
         }
 
         if (planPrice) {

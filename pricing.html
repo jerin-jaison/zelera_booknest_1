@@ -84,75 +84,96 @@
         <div class="container">
             <div class="row g-4 justify-content-center">
 
-                <!-- STANDARD PLAN -->
-                <div class="col-lg-5">
+                <!-- BASIC PLAN -->
+                <div class="col-lg-4">
                     <div class="pricing-card animate-on-scroll fade-in-left">
                         <h3 class="pricing-title">
-                            <i class="fas fa-star" style="color: var(--color-neon-blue);"></i>
-                            Standard Plan
+                            <i class="fas fa-code" style="color: var(--color-gold);"></i>
+                            Basic Plan
                         </h3>
 
-                        <div class="pricing-price" data-price="standard">₹75,000</div>
+                        <div class="pricing-price" data-price="basic">₹75,000</div>
                         <p style="color: var(--color-gray-lightest); margin-bottom: 2rem;">
-                            Perfect for growing book businesses
+                            Source Code Only
                         </p>
 
                         <ul class="pricing-features">
-                            <li>Complete BookNest website</li>
-                            <li>Professional admin panel</li>
-                            <li>User authentication system</li>
-                            <li>Book management system</li>
-                            <li>Shopping cart & checkout</li>
-                            <li>Payment gateway integration</li>
-                            <li>Mobile responsive design</li>
-                            <li>SEO optimized</li>
-                            <li>3 months support</li>
-                            <li>Free updates</li>
-                            <li>Documentation included</li>
-                            <li>Email support</li>
+                            <li><strong>Complete Source Code</strong></li>
+                            <li>BookNest Web Platform</li>
+                            <li>Admin Dashboard with UI</li>
+                            <li>Installation Guide</li>
+                            <li>No Setup Support</li>
+                            <li>No Hosting Support</li>
+                            <li>Self-Deployment</li>
+                            <li>Email Support (30 days)</li>
                         </ul>
 
-                        <button class="btn btn-secondary btn-lg w-100 mt-4" data-buy-plan="standard">
-                            <i class="fas fa-shopping-cart"></i> Buy Standard Plan
+                        <button class="btn btn-outline-light btn-lg w-100 mt-4" data-buy-plan="basic">
+                            <i class="fas fa-code"></i> Buy Source Code
                         </button>
                     </div>
                 </div>
 
-                <!-- PREMIUM PLAN (FEATURED) -->
-                <div class="col-lg-5">
-                    <div class="pricing-card featured animate-on-scroll fade-in-right">
+                <!-- STANDARD PLAN (FEATURED) -->
+                <div class="col-lg-4">
+                    <div class="pricing-card featured animate-on-scroll fade-in-up">
                         <span class="pricing-badge badge-glow">
-                            <i class="fas fa-crown"></i> MOST POPULAR
+                            <i class="fas fa-star"></i> POPULAR
                         </span>
 
+                        <h3 class="pricing-title">
+                            <i class="fas fa-layer-group" style="color: var(--color-gold);"></i>
+                            Standard Plan
+                        </h3>
+
+                        <div class="pricing-price" data-price="standard">₹1,00,000</div>
+                        <p style="color: var(--color-gray-lightest); margin-bottom: 2rem;">
+                            Complete Solution + Setup
+                        </p>
+
+                        <ul class="pricing-features">
+                            <li><strong>Everything in Basic, plus:</strong></li>
+                            <li><strong>Full Installation Service</strong></li>
+                            <li>Standard Admin Panel</li>
+                            <li>Payment Gateway Setup</li>
+                            <li>Hosting Configuration</li>
+                            <li>3 Months Support</li>
+                            <li>Basic Customization</li>
+                            <li>Documentation Included</li>
+                        </ul>
+
+                        <button class="btn btn-primary btn-lg w-100 mt-4 pulse" data-buy-plan="standard">
+                            <i class="fas fa-rocket"></i> Buy Standard Plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PREMIUM PLAN -->
+                <div class="col-lg-4">
+                    <div class="pricing-card animate-on-scroll fade-in-right">
                         <h3 class="pricing-title">
                             <i class="fas fa-crown" style="color: var(--color-gold);"></i>
                             Premium Plan
                         </h3>
 
-                        <div class="pricing-price" data-price="premium">₹1,00,000</div>
+                        <div class="pricing-price" data-price="premium">₹1,50,000</div>
                         <p style="color: var(--color-gray-lightest); margin-bottom: 2rem;">
-                            For serious businesses demanding excellence
+                            Enterprise Grade + Priority
                         </p>
 
                         <ul class="pricing-features">
                             <li><strong>Everything in Standard, plus:</strong></li>
-                            <li>Custom UI branding & design</li>
-                            <li>Advanced analytics dashboard</li>
-                            <li>Multi-currency support</li>
-                            <li>Inventory management</li>
-                            <li>Customer management system</li>
-                            <li>Email marketing integration</li>
-                            <li>Advanced reporting</li>
-                            <li>Priority support (6 months)</li>
-                            <li>Deployment assistance</li>
-                            <li>WhatsApp support</li>
-                            <li>1-on-1 onboarding call</li>
-                            <li>Unlimited email support</li>
-                            <li>Free feature requests</li>
+                            <li><strong>Custom UI Branding</strong></li>
+                            <li>Advanced Analytics Dashboard</li>
+                            <li>Priority Support (6 Months)</li>
+                            <li>1-on-1 Onboarding Call</li>
+                            <li>Multi-Currency Setup</li>
+                            <li>WhatsApp Support</li>
+                            <li>Free Feature Requests</li>
                         </ul>
 
-                        <button class="btn btn-primary btn-lg w-100 mt-4 pulse" data-buy-plan="premium">
+                        <button class="btn btn-outline btn-lg w-100 mt-4" data-buy-plan="premium"
+                            style="border-color: var(--color-gold); color: var(--color-gold);">
                             <i class="fas fa-crown"></i> Buy Premium Plan
                         </button>
                     </div>
@@ -193,6 +214,9 @@
                                 Feature</th>
                             <th
                                 style="padding: 1.5rem; text-align: center; color: var(--color-black); font-weight: 700;">
+                                Basic</th>
+                            <th
+                                style="padding: 1.5rem; text-align: center; color: var(--color-black); font-weight: 700;">
                                 Standard</th>
                             <th
                                 style="padding: 1.5rem; text-align: center; color: var(--color-black); font-weight: 700;">
@@ -201,70 +225,53 @@
                     </thead>
                     <tbody>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;">Complete Website</td>
+                            <td style="padding: 1rem;">Source Code</td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
-                                    style="color: var(--color-gold);"></i></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;">Admin Dashboard</td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;">Payment Integration</td>
+                            <td style="padding: 1rem;">Installation Service</td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;">Mobile Responsive</td>
+                            <td style="padding: 1rem;">Payment Gateway Setup</td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;"><strong>Custom Branding</strong></td>
+                            <td style="padding: 1rem;"><strong>Custom UI Branding</strong></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
+                                    style="color: #666;"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
                                     style="color: #666;"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;"><strong>Advanced Analytics</strong></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
-                                    style="color: #666;"></i></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
-                                    style="color: var(--color-gold);"></i></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;"><strong>Multi-Currency</strong></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
-                                    style="color: #666;"></i></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
-                                    style="color: var(--color-gold);"></i></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;">Support Duration</td>
-                            <td style="padding: 1rem; text-align: center;">3 months</td>
-                            <td style="padding: 1rem; text-align: center;"><strong>6 months</strong></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <td style="padding: 1rem;"><strong>Priority Support</strong></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
-                                    style="color: #666;"></i></td>
-                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
-                                    style="color: var(--color-gold);"></i></td>
+                            <td style="padding: 1rem;">Support</td>
+                            <td style="padding: 1rem; text-align: center;">Email Only</td>
+                            <td style="padding: 1rem; text-align: center;">Standard</td>
+                            <td style="padding: 1rem; text-align: center;"><strong>Priority + WhatsApp</strong></td>
                         </tr>
                         <tr>
-                            <td style="padding: 1rem;"><strong>Deployment Assistance</strong></td>
+                            <td style="padding: 1rem;">Hosting Setup</td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-times"
                                     style="color: #666;"></i></td>
+                            <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
+                                    style="color: var(--color-gold);"></i></td>
                             <td style="padding: 1rem; text-align: center;"><i class="fas fa-check"
                                     style="color: var(--color-gold);"></i></td>
                         </tr>
@@ -287,9 +294,9 @@
                         <h4><i class="fas fa-question-circle"
                                 style="color: var(--color-gold); margin-right: 0.5rem;"></i>What payment methods do you
                             accept?</h4>
-                        <p>We accept payments through Razorpay (UPI, cards, net banking) and Cash on Delivery. All
-                            Razorpay
-                            transactions are secure and encrypted.</p>
+                        <p>We accept payments through Razorpay (UPI, cards, net banking). All Razorpay
+                            transactions are secure and encrypted. We do not offer Cash on Delivery for software
+                            licenses.</p>
                     </div>
 
                     <div class="card card-glass mb-3 animate-on-scroll fade-in-up delay-1">
@@ -366,8 +373,8 @@
                 <div class="footer-section">
                     <h4>Contact Us</h4>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> support@zelera.com</li>
-                        <li><i class="fas fa-phone"></i> +91-XXXXX-XXXXX</li>
+                        <li><i class="fas fa-envelope"></i> teamzelera@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +91 7012783442</li>
                     </ul>
                 </div>
             </div>

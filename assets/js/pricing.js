@@ -12,9 +12,11 @@ const EXCHANGE_RATES = {
 };
 
 // Base prices in INR
+// Base prices in INR
 const BASE_PRICES = {
-    standard: 75000,
-    premium: 100000
+    basic: 75000,
+    standard: 100000,
+    premium: 150000
 };
 
 // Currency symbols
@@ -139,6 +141,16 @@ class PricingManager {
     }
 
     updateAllPrices() {
+        // Update basic plan prices
+        const basicPrices = document.querySelectorAll('[data-price="basic"]');
+        const basicPrice = this.convertPrice(BASE_PRICES.basic);
+
+        basicPrices.forEach(element => {
+            element.textContent = this.formatPrice(basicPrice);
+            element.dataset.amount = basicPrice;
+            element.dataset.currency = this.currentCurrency;
+        });
+
         // Update standard plan prices
         const standardPrices = document.querySelectorAll('[data-price="standard"]');
         const standardPrice = this.convertPrice(BASE_PRICES.standard);

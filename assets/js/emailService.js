@@ -6,141 +6,186 @@
 // EmailJS Configuration
 // Sign up at https://www.emailjs.com/ to get your credentials
 const EMAILJS_CONFIG = {
-    serviceId: 'YOUR_SERVICE_ID',
-    templateId: 'YOUR_TEMPLATE_ID',
-    publicKey: 'YOUR_PUBLIC_KEY'
+  serviceId: 'YOUR_SERVICE_ID',
+  templateId: 'YOUR_TEMPLATE_ID',
+  publicKey: 'YOUR_PUBLIC_KEY'
 };
 
 class EmailService {
-    constructor() {
-        this.initialized = false;
-        this.init();
+  constructor() {
+    this.initialized = false;
+    this.init();
+  }
+
+  init() {
+    this.loadEmailJS();
+  }
+
+  loadEmailJS() {
+    // Load EmailJS SDK
+    if (!document.getElementById('emailjs-script')) {
+      const script = document.createElement('script');
+      script.id = 'emailjs-script';
+      script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+      script.async = true;
+      script.onload = () => {
+        this.initializeEmailJS();
+      };
+      document.head.appendChild(script);
+    }
+  }
+
+  initializeEmailJS() {
+    if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY') {
+      emailjs.init(EMAILJS_CONFIG.publicKey);
+      this.initialized = true;
+      console.log('EmailJS initialized successfully');
+    } else {
+      console.warn('EmailJS not configured. Please set up EmailJS credentials in emailService.js');
+    }
+  }
+
+  async sendOrderConfirmation(orderDetails) {
+    if (!this.initialized) {
+      console.warn('EmailJS not initialized. Email not sent.');
+      // For demo purposes, simulate email sending
+      return this.simulateEmailSend(orderDetails);
     }
 
-    init() {
-        this.loadEmailJS();
+    try {
+      const templateParams = this.prepareOrderConfirmationTemplate(orderDetails);
+
+      const response = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
+        templateParams
+      );
+
+      console.log('Order confirmation email sent successfully:', response);
+      return { success: true, response };
+
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      return { success: false, error };
+    }
+  }
+
+  async sendContactQuery(contactDetails) {
+    if (!this.initialized) {
+      console.warn('EmailJS not initialized. Message not sent.');
+      return { success: true, simulated: true };
     }
 
-    loadEmailJS() {
-        // Load EmailJS SDK
-        if (!document.getElementById('emailjs-script')) {
-            const script = document.createElement('script');
-            script.id = 'emailjs-script';
-            script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-            script.async = true;
-            script.onload = () => {
-                this.initializeEmailJS();
-            };
-            document.head.appendChild(script);
-        }
+    try {
+      // Map form fields to template params
+      // Make sure your EmailJS template has these variables:
+      // from_name, from_email, phone, subject, message, reply_to
+      const templateParams = {
+        from_name: contactDetails.name,
+        from_email: contactDetails.email,
+        phone: contactDetails.phone,
+        subject: contactDetails.subject,
+        message: contactDetails.message,
+        reply_to: contactDetails.email,
+        to_email: 'teamzelera@gmail.com'
+      };
+
+      const response = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId, // using the same template ID or you can add a separate one for contact
+        templateParams
+      );
+
+      console.log('Contact query sent successfully:', response);
+      return { success: true, response };
+
+    } catch (error) {
+      console.error('Failed to send contact query:', error);
+      return { success: false, error };
     }
+  }
 
-    initializeEmailJS() {
-        if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY') {
-            emailjs.init(EMAILJS_CONFIG.publicKey);
-            this.initialized = true;
-            console.log('EmailJS initialized successfully');
-        } else {
-            console.warn('EmailJS not configured. Please set up EmailJS credentials in emailService.js');
-        }
-    }
+  prepareOrderConfirmationTemplate(orderDetails) {
+    const planNames = {
+      'basic': 'Basic Plan',
+      'standard': 'Standard Plan',
+      'premium': 'Premium Plan'
+    };
+    const planName = planNames[orderDetails.plan] || orderDetails.plan;
+    const currency = orderDetails.currency || 'INR';
+    const symbol = this.getCurrencySymbol(currency);
 
-    async sendOrderConfirmation(orderDetails) {
-        if (!this.initialized) {
-            console.warn('EmailJS not initialized. Email not sent.');
-            // For demo purposes, simulate email sending
-            return this.simulateEmailSend(orderDetails);
-        }
+    return {
+      to_name: orderDetails.customer.name,
+      to_email: orderDetails.customer.email,
+      order_id: orderDetails.orderId,
+      plan_name: planName,
+      amount: `${symbol}${orderDetails.amount.toLocaleString()}`,
+      payment_id: orderDetails.paymentId,
+      company: orderDetails.customer.company || 'N/A',
+      phone: orderDetails.customer.phone,
+      order_date: new Date(orderDetails.timestamp).toLocaleDateString(),
+      // Product delivery information
+      product_name: 'BookNest - Premium Book Management Platform',
+      download_link: this.generateDownloadLink(orderDetails),
+      access_credentials: this.generateAccessCredentials(orderDetails),
+      support_email: 'teamzelera@gmail.com',
+      support_phone: '+91 7012783442'
+    };
+  }
 
-        try {
-            const templateParams = this.prepareOrderConfirmationTemplate(orderDetails);
+  generateDownloadLink(orderDetails) {
+    // In production, this would be a real download link from your server
+    // For demo, generate a placeholder
+    return `https://zelera.com/download/${orderDetails.orderId}`;
+  }
 
-            const response = await emailjs.send(
-                EMAILJS_CONFIG.serviceId,
-                EMAILJS_CONFIG.templateId,
-                templateParams
-            );
+  generateAccessCredentials(orderDetails) {
+    // In production, generate real credentials
+    // For demo, create placeholder
+    return {
+      username: orderDetails.customer.email,
+      password: 'Will be sent separately',
+      portalUrl: 'https://portal.zelera.com'
+    };
+  }
 
-            console.log('Order confirmation email sent successfully:', response);
-            return { success: true, response };
+  getCurrencySymbol(currency) {
+    const symbols = {
+      'INR': '₹',
+      'USD': '$',
+      'EUR': '€',
+      'GBP': '£'
+    };
+    return symbols[currency] || currency;
+  }
 
-        } catch (error) {
-            console.error('Failed to send email:', error);
-            return { success: false, error };
-        }
-    }
+  async simulateEmailSend(orderDetails) {
+    // Simulate email sending for demo purposes
+    console.log('=== SIMULATED EMAIL ===');
+    console.log('Sending order confirmation email to:', orderDetails.customer.email);
+    console.log('Order ID:', orderDetails.orderId);
+    console.log('Plan:', orderDetails.plan);
+    console.log('Amount:', orderDetails.amount, orderDetails.currency);
+    console.log('======================');
 
-    prepareOrderConfirmationTemplate(orderDetails) {
-        const planName = orderDetails.plan === 'standard' ? 'Standard Plan' : 'Premium Plan';
-        const currency = orderDetails.currency || 'INR';
-        const symbol = this.getCurrencySymbol(currency);
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-        return {
-            to_name: orderDetails.customer.name,
-            to_email: orderDetails.customer.email,
-            order_id: orderDetails.orderId,
-            plan_name: planName,
-            amount: `${symbol}${orderDetails.amount.toLocaleString()}`,
-            payment_id: orderDetails.paymentId,
-            company: orderDetails.customer.company || 'N/A',
-            phone: orderDetails.customer.phone,
-            order_date: new Date(orderDetails.timestamp).toLocaleDateString(),
-            // Product delivery information
-            product_name: 'BookNest - Premium Book Management Platform',
-            download_link: this.generateDownloadLink(orderDetails),
-            access_credentials: this.generateAccessCredentials(orderDetails),
-            support_email: 'support@zelera.com',
-            support_phone: '+91-XXXXX-XXXXX'
-        };
-    }
+    return { success: true, simulated: true };
+  }
 
-    generateDownloadLink(orderDetails) {
-        // In production, this would be a real download link from your server
-        // For demo, generate a placeholder
-        return `https://zelera.com/download/${orderDetails.orderId}`;
-    }
+  // Email template for manual reference
+  getEmailTemplate(orderDetails) {
+    const planNames = {
+      'basic': 'Basic Plan',
+      'standard': 'Standard Plan',
+      'premium': 'Premium Plan'
+    };
+    const planName = planNames[orderDetails.plan] || orderDetails.plan;
+    const symbol = this.getCurrencySymbol(orderDetails.currency);
 
-    generateAccessCredentials(orderDetails) {
-        // In production, generate real credentials
-        // For demo, create placeholder
-        return {
-            username: orderDetails.customer.email,
-            password: 'Will be sent separately',
-            portalUrl: 'https://portal.zelera.com'
-        };
-    }
-
-    getCurrencySymbol(currency) {
-        const symbols = {
-            'INR': '₹',
-            'USD': '$',
-            'EUR': '€',
-            'GBP': '£'
-        };
-        return symbols[currency] || currency;
-    }
-
-    async simulateEmailSend(orderDetails) {
-        // Simulate email sending for demo purposes
-        console.log('=== SIMULATED EMAIL ===');
-        console.log('Sending order confirmation email to:', orderDetails.customer.email);
-        console.log('Order ID:', orderDetails.orderId);
-        console.log('Plan:', orderDetails.plan);
-        console.log('Amount:', orderDetails.amount, orderDetails.currency);
-        console.log('======================');
-
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        return { success: true, simulated: true };
-    }
-
-    // Email template for manual reference
-    getEmailTemplate(orderDetails) {
-        const planName = orderDetails.plan === 'standard' ? 'Standard Plan' : 'Premium Plan';
-        const symbol = this.getCurrencySymbol(orderDetails.currency);
-
-        return `
+    return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,8 +257,8 @@ class EmailService {
       <h3>Support:</h3>
       <p>If you have any questions, please contact us at:</p>
       <ul>
-        <li>Email: support@zelera.com</li>
-        <li>Phone: +91-XXXXX-XXXXX</li>
+        <li>Email: teamzelera@gmail.com</li>
+        <li>Phone: +91 7012783442</li>
         <li>Portal: <a href="https://portal.zelera.com">portal.zelera.com</a></li>
       </ul>
     </div>
@@ -226,32 +271,32 @@ class EmailService {
 </body>
 </html>
     `;
-    }
+  }
 
-    // Admin notification email
-    async sendAdminNotification(orderDetails) {
-        console.log('=== ADMIN NOTIFICATION ===');
-        console.log('New order received:');
-        console.log('Customer:', orderDetails.customer.name, '(' + orderDetails.customer.email + ')');
-        console.log('Plan:', orderDetails.plan);
-        console.log('Amount:', orderDetails.amount, orderDetails.currency);
-        console.log('Order ID:', orderDetails.orderId);
-        console.log('========================');
+  // Admin notification email
+  async sendAdminNotification(orderDetails) {
+    console.log('=== ADMIN NOTIFICATION ===');
+    console.log('New order received:');
+    console.log('Customer:', orderDetails.customer.name, '(' + orderDetails.customer.email + ')');
+    console.log('Plan:', orderDetails.plan);
+    console.log('Amount:', orderDetails.amount, orderDetails.currency);
+    console.log('Order ID:', orderDetails.orderId);
+    console.log('========================');
 
-        // In production, send actual email to admin
-        return { success: true };
-    }
+    // In production, send actual email to admin
+    return { success: true };
+  }
 }
 
 // Initialize email service
 let emailService;
 
 document.addEventListener('DOMContentLoaded', function () {
-    emailService = new EmailService();
-    window.emailService = emailService;
+  emailService = new EmailService();
+  window.emailService = emailService;
 });
 
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { EmailService };
+  module.exports = { EmailService };
 }

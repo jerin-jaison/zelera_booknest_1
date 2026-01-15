@@ -129,9 +129,39 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       if (isValid) {
-        // Show success message or submit
-        showNotification('Form submitted successfully!', 'success');
-        form.reset();
+        // Handle Contact Form Submission
+        if (form.id === 'contact-form' && window.emailService) {
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+          submitBtn.disabled = true;
+
+          const contactDetails = {
+            name: form.querySelector('#contact-name').value,
+            email: form.querySelector('#contact-email').value,
+            phone: form.querySelector('#contact-phone').value,
+            subject: form.querySelector('#contact-subject').value,
+            message: form.querySelector('#contact-message').value
+          };
+
+          window.emailService.sendContactQuery(contactDetails)
+            .then(response => {
+              if (response.success) {
+                showNotification('Message sent successfully! We will get back to you soon.', 'success');
+                form.reset();
+              } else {
+                showNotification('Failed to send message. Please try again later.', 'error');
+              }
+            })
+            .finally(() => {
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+            });
+        } else {
+          // Default success message for other forms
+          showNotification('Form submitted successfully!', 'success');
+          form.reset();
+        }
       } else {
         showNotification('Please fill in all required fields', 'error');
       }
