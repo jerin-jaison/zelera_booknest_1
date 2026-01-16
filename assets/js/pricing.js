@@ -67,10 +67,8 @@ class PricingManager {
             selector.value = this.currentCurrency;
         });
 
-        // Listen for custom currency change events
-        document.addEventListener('currencyChanged', (e) => {
-            this.changeCurrency(e.detail.currency);
-        });
+        // NOTE: Removed currencyChanged event listener here as it causes infinite loop
+        // changeCurrency already dispatches this event, so listening to it creates recursion
     }
 
     async detectUserLocation() {

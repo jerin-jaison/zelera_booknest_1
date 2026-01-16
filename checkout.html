@@ -67,7 +67,8 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="customer-phone" class="form-label">Phone Number *</label>
                                     <input type="tel" class="form-control" id="customer-phone"
-                                        placeholder="+91 XXXXX XXXXX" required>
+                                        placeholder="+91 XXXXX XXXXX" maxlength="10" pattern="[0-9]{10}"
+                                        title="Please enter exactly 10 digits" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
@@ -82,8 +83,12 @@
                             <!--  PAYMENT METHOD SELECTION -->
                             <h4 style="color: var(--color-neon-blue); margin-bottom: 1.5rem;">Select Payment Method</h4>
 
-                            <div class="payment-methods">
-                                <div class="payment-method selected" data-method="razorpay">
+                            <div class="payment-methods" id="payment-methods-container">
+                                <!-- Payment methods will be dynamically loaded based on currency -->
+
+                                <!-- Razorpay (India - INR only) -->
+                                <div class="payment-method selected razorpay-method" id="razorpay-method"
+                                    data-method="razorpay" style="display: none;">
                                     <div
                                         style="height: 50px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
                                         <svg width="120" height="30" viewBox="0 0 120 30" fill="#00D9FF">
@@ -91,15 +96,20 @@
                                                 font-weight="bold">Razorpay</text>
                                         </svg>
                                     </div>
-                                    <p style="font-size: 0.875rem; margin: 0;">UPI, Cards, Net Banking</p>
+                                    <p style="font-size: 0.875rem; margin: 0;">UPI, Cards, Net Banking (India)</p>
                                 </div>
 
-                                <div class="payment-method" data-method="cod">
+                                <!-- PayPal (International) -->
+                                <div class="payment-method paypal-method" id="paypal-method" data-method="paypal"
+                                    style="display: none;">
                                     <div
                                         style="height: 50px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
-                                        <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: #00D9FF;"></i>
+                                        <svg width="120" height="30" viewBox="0 0 120 30" fill="#00D9FF">
+                                            <text x="0" y="20" font-family="Arial, sans-serif" font-size="20"
+                                                font-weight="bold">PayPal</text>
+                                        </svg>
                                     </div>
-                                    <p style="font-size: 0.875rem; margin: 0;">Cash on Delivery</p>
+                                    <p style="font-size: 0.875rem; margin: 0;">International Payments</p>
                                 </div>
                             </div>
 
@@ -121,7 +131,7 @@
                             </div>
 
                             <!-- SUBMIT BUTTON -->
-                            <button type="submit" class="btn btn-primary btn-lg w-100 pulse">
+                            <button type="button" id="proceed-payment-btn" class="btn btn-primary btn-lg w-100 pulse">
                                 <i class="fas fa-lock"></i> Proceed to Payment
                             </button>
 
@@ -175,18 +185,6 @@
                                 <li style="padding: 0.25rem 0;"><i class="fas fa-check"
                                         style="color: var(--color-gold); margin-right: 0.5rem;"></i>Premium Support</li>
                             </ul>
-                        </div>
-
-                        <!-- Currency Selector in Sidebar -->
-                        <div style="margin-bottom: 1rem;">
-                            <label
-                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.875rem;">Currency:</label>
-                            <select data-currency-selector class="form-control">
-                                <option value="INR">India (₹)</option>
-                                <option value="USD">USA ($)</option>
-                                <option value="EUR">Europe (€)</option>
-                                <option value="GBP">UK (£)</option>
-                            </select>
                         </div>
 
                         <div
@@ -248,9 +246,124 @@
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/phone-validation.js"></script>
     <script src="assets/js/pricing.js"></script>
     <script src="assets/js/payment.js"></script>
     <script src="assets/js/emailService.js"></script>
+
+    <!-- Checkout Page Dynamic Content -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load order data from sessionStorage
+            const orderData = sessionStorage.getItem('orderData');
+
+            if (orderData) {
+                const data = JSON.parse(orderData);
+
+                // Plan names mapping
+                const planNames = {
+                    'basic': 'Basic',
+                    'standard': 'Standard',
+                    'premium': 'Premium'
+                };
+
+                // Plan descriptions mapping
+                const planDescriptions = {
+                    'basic': 'Essential BookNest platform for small businesses',
+                    'standard': 'Professional BookNest platform for growing businesses',
+                    'premium': 'Enterprise-grade BookNest platform'
+                };
+
+                const planName = planNames[data.plan] || 'Premium';
+                const planDescription = planDescriptions[data.plan] || 'Enterprise-grade BookNest platform';
+
+                // Update plan name
+                const planNameElement = document.getElementById('order-plan-name');
+                if (planNameElement) {
+                    planNameElement.textContent = planName + ' Plan';
+                }
+
+                // Update plan description
+                const planDescElement = document.querySelector('#order-plan-name + p');
+                if (planDescElement) {
+                    planDescElement.textContent = planDescription;
+                }
+
+                // Update plan price
+                const planPriceElement = document.getElementById('order-plan-price');
+                if (planPriceElement) {
+                    const currency = data.currency || 'INR';
+                    const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€', 'GBP': '£' };
+                    const symbol = symbols[currency] || '₹';
+                    planPriceElement.textContent = symbol + data.amount.toLocaleString();
+                }
+
+                // Show appropriate payment method based on currency
+                const razorpayMethod = document.getElementById('razorpay-method');
+                const paypalMethod = document.getElementById('paypal-method');
+
+                if (data.currency === 'INR') {
+                    // Show Razorpay for India
+                    if (razorpayMethod) {
+                        razorpayMethod.style.display = 'block';
+                        razorpayMethod.classList.add('selected');
+                    }
+                    if (paypalMethod) {
+                        paypalMethod.style.display = 'none';
+                        paypalMethod.classList.remove('selected');
+                    }
+                } else {
+                    // Show PayPal for international currencies
+                    if (paypalMethod) {
+                        paypalMethod.style.display = 'block';
+                        paypalMethod.classList.add('selected');
+                    }
+                    if (razorpayMethod) {
+                        razorpayMethod.style.display = 'none';
+                        razorpayMethod.classList.remove('selected');
+                    }
+                }
+            }
+
+            // Check for failed payment and restore customer data
+            const failedPayment = sessionStorage.getItem('failedPayment');
+            if (failedPayment) {
+                try {
+                    const failedData = JSON.parse(failedPayment);
+
+                    // Restore customer data in form
+                    if (failedData.customerData) {
+                        const nameInput = document.getElementById('customer-name');
+                        const emailInput = document.getElementById('customer-email');
+                        const phoneInput = document.getElementById('customer-phone');
+                        const companyInput = document.getElementById('customer-company');
+
+                        if (nameInput && failedData.customerData.name) {
+                            nameInput.value = failedData.customerData.name;
+                        }
+                        if (emailInput && failedData.customerData.email) {
+                            emailInput.value = failedData.customerData.email;
+                        }
+                        if (phoneInput && failedData.customerData.phone) {
+                            phoneInput.value = failedData.customerData.phone;
+                        }
+                        if (companyInput && failedData.customerData.company) {
+                            companyInput.value = failedData.customerData.company;
+                        }
+
+                        // Show retry message
+                        setTimeout(function () {
+                            if (window.showNotification) {
+                                window.showNotification('Your previous payment failed. Please try again.', 'error');
+                            }
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error('Error restoring failed payment data:', e);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
