@@ -16,8 +16,9 @@ const PAYMENT_CONFIG = {
         }
     },
     paypal: {
-        clientId: 'YOUR_PAYPAL_CLIENT_ID', // Replace with actual PayPal client ID
-        currency: 'USD'
+        clientId: 'AYlPajZuMhLjIL9YYm8yLtlxCc-3DvlU-PfbhH-BYk2Xp0mWCbnQvScMPlZKsxkihvUaD9goUvHKMfxT',
+        currency: 'USD', // Default currency, will be overridden by order currency
+        intent: 'capture'
     },
     // Company/Admin Details for Invoice
     company: {
@@ -408,19 +409,124 @@ class PaymentManager {
     }
 
     async processPayPal(customerData) {
-        // PayPal integration would require server-side setup
-        // This is a simplified client-side demonstration
+        try {
+            console.log('Processing PayPal payment...');
 
-        this.hidePaymentProcessing();
+            // Check if PayPal SDK is loaded
+            if (typeof paypal === 'undefined') {
+                console.error('PayPal SDK not loaded');
+                this.hidePaymentProcessing();
+                alert('PayPal is not loaded. Please refresh the page and try again.');
+                return;
+            }
 
-        // Simulate PayPal payment for demo
-        setTimeout(() => {
-            const mockResponse = {
-                paymentId: 'PAYPAL_' + Date.now(),
-                status: 'success'
-            };
-            this.handlePaymentSuccess(mockResponse, customerData);
-        }, 2000);
+            // Hide the processing overlay
+            this.hidePaymentProcessing();
+
+            // Create PayPal button container if doesn't exist
+            let paypalContainer = document.getElementById('paypal-button-container');
+            if (!paypalContainer) {
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.id = 'paypal-overlay';
+                overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; display: flex; align-items: center; justify-content: center;';
+
+                // Create modal
+                const modal = document.createElement('div');
+                modal.id = 'paypal-modal';
+                modal.style.cssText = 'background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-width: 500px; width: 90%;';
+
+                // Add title
+                const title = document.createElement('h3');
+                title.textContent = 'Complete Payment with PayPal';
+                title.style.cssText = 'margin-top: 0; color: #333;';
+                modal.appendChild(title);
+
+                // Create button container
+                paypalContainer = document.createElement('div');
+                paypalContainer.id = 'paypal-button-container';
+                paypalContainer.style.cssText = 'margin: 1rem 0;';
+                modal.appendChild(paypalContainer);
+
+                // Add close button
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = 'Cancel';
+                closeBtn.style.cssText = 'width: 100%; padding: 0.75rem; background: #666; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 1rem;';
+                closeBtn.onclick = () => overlay.remove();
+                modal.appendChild(closeBtn);
+
+                overlay.appendChild(modal);
+                document.body.appendChild(overlay);
+            }
+
+            // Render PayPal buttons
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder: (data, actions) => {
+                    console.log('Creating PayPal order...');
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                currency_code: this.orderData.currency,
+                                value: this.orderData.amount.toFixed(2)
+                            },
+                            description: `${this.selectedPlan.toUpperCase()} Plan - Zelera BookNest Platform`
+                        }],
+                        application_context: {
+                            brand_name: 'Zelera BookNest',
+                            shipping_preference: 'NO_SHIPPING'
+                        }
+                    });
+                },
+                onApprove: async (data, actions) => {
+                    try {
+                        console.log('PayPal order approved, capturing...');
+                        const order = await actions.order.capture();
+                        console.log('PayPal payment successful:', order);
+
+                        // Remove PayPal overlay
+                        document.getElementById('paypal-overlay')?.remove();
+
+                        // Format response for our success handler
+                        const response = {
+                            paymentId: order.id,
+                            orderId: this.generateOrderId(),
+                            status: order.status
+                        };
+
+                        await this.handlePaymentSuccess(response, customerData);
+                    } catch (error) {
+                        console.error('Error capturing PayPal order:', error);
+                        document.getElementById('paypal-overlay')?.remove();
+                        this.handlePaymentFailure(error, customerData);
+                    }
+                },
+                onCancel: (data) => {
+                    console.log('PayPal payment cancelled by user');
+                    document.getElementById('paypal-overlay')?.remove();
+                    if (window.showNotification) {
+                        window.showNotification('Payment cancelled. You can try again.', 'error');
+                    } else {
+                        alert('Payment cancelled. You can try again.');
+                    }
+                },
+                onError: (err) => {
+                    console.error('PayPal error:', err);
+                    document.getElementById('paypal-overlay')?.remove();
+                    this.handlePaymentFailure(err, customerData);
+                }
+            }).render('#paypal-button-container');
+
+        } catch (error) {
+            console.error('PayPal processing error:', error);
+            this.hidePaymentProcessing();
+            alert('Failed to initialize PayPal. Please try again.');
+        }
     }
 
     async processGooglePay(customerData) {
@@ -484,6 +590,9 @@ class PaymentManager {
         // Save to localStorage
         localStorage.setItem('lastOrder', JSON.stringify(orderDetails));
 
+        // Create one-time access token for success page
+        sessionStorage.setItem('paymentSuccessToken', orderDetails.orderId);
+
         // Clear session storage
         sessionStorage.removeItem('orderData');
         sessionStorage.removeItem('failedPayment');
@@ -503,7 +612,7 @@ class PaymentManager {
 
         // Redirect to success page after animation
         setTimeout(() => {
-            window.location.href = 'success.html';
+            window.location.replace('success.html'); // Use replace to prevent back button
         }, 3000);
     }
 
@@ -679,21 +788,29 @@ class PaymentManager {
         doc.setTextColor(255, 215, 0);
         doc.text(`${symbol}${orderDetails.amount.toLocaleString()}`, pageWidth - 20, yPos, { align: 'right' });
 
-        // Payment Success Stamp
+        // Payment Success Stamp - Centered
         yPos += 15;
-        doc.setDrawColor(0, 200, 0);
-        doc.setLineWidth(2);
-        doc.setTextColor(0, 150, 0);
-        doc.setFontSize(16);
+
+        // PAID stamp styling
+        doc.setDrawColor(34, 197, 94); // Green border
+        doc.setLineWidth(3);
+        doc.setTextColor(34, 197, 94); // Green text
+        doc.setFontSize(40);
         doc.setFont(undefined, 'bold');
 
-        const stampText = '✓ PAID';
-        const stampWidth = doc.getTextWidth(stampText);
-        const stampX = (pageWidth - stampWidth) / 2;
-        doc.text(stampText, stampX, yPos);
-        doc.rect(stampX - 5, yPos - 8, stampWidth + 10, 12);
+        // Center the stamp on the page
+        const stampWidth = 60;
+        const stampHeight = 20;
+        const stampX = (pageWidth - stampWidth) / 2; // Center horizontally
 
-        // Footer Section
+        // Draw rectangle border
+        doc.rect(stampX, yPos, stampWidth, stampHeight);
+
+        // Draw centered text
+        doc.text('PAID', pageWidth / 2, yPos + 13, { align: 'center' });
+
+        // Reset color for footer
+        doc.setTextColor(0, 0, 0);
         yPos = doc.internal.pageSize.height - 50;
         doc.setDrawColor(255, 215, 0);
         doc.setLineWidth(0.5);
