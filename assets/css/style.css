@@ -344,6 +344,20 @@ section {
   box-shadow: var(--shadow-lg);
 }
 
+/* Fix for hover visibility */
+.navbar:hover {
+  background: var(--color-charcoal);
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.navbar:hover .nav-link {
+  color: var(--color-white);
+}
+
+.navbar:hover .nav-link:hover {
+  color: var(--color-gold);
+}
+
 .navbar .container {
   display: flex;
   justify-content: space-between;
